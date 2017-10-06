@@ -1,0 +1,27 @@
+{
+    "name": "byteable/tangolara",
+    "description": "A Laravel/Lumen package to integrate Tango.",
+    "type": "library",
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "Jonathan Leek",
+            "email": "develoeprs@byteable.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+      "php": ">=5.5.9",
+      "guzzlehttp/guzzle": "^6.1",
+      "illuminate/support": "~5.0",
+      "illuminate/container": "~5.0"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+      "psr-4": {
+        "Byteable\\Tangolara\\": "src/"
+      }
+    }
+}
