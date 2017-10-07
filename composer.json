@@ -1,5 +1,5 @@
 {
-    "name": "byteable/tangolara",
+    "name": "byteableio/tangolara",
     "description": "A Laravel/Lumen package to integrate Tango.",
     "type": "library",
     "license": "GNU",
