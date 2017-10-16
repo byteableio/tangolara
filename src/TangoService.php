@@ -7,7 +7,7 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use Byteable\Tangolara\Exceptions\TangoException;
 
-class TangoApi
+class TangoService
 {
   const ENDPOINT = "https://integration-api.tangocard.com";
 
@@ -55,14 +55,14 @@ class TangoApi
    *
    * @param null $key
    */
-   public function getCustomer($customer = false)
-   {
-     $resource = $customer ? self::CUSTOMER_RESOURCE . "/$customer" : self::CUSTOMER_RESOURCE;
+   // public function getCustomer($customer = false)
+   // {
+   //   $resource = $customer ? self::CUSTOMER_RESOURCE . "/$customer" : self::CUSTOMER_RESOURCE;
 
-     $customer = json_decode($this->request("GET", $resource), true);
+   //   $customer = json_decode($this->request("GET", $resource), true);
 
-     return $this->_collect($customer);
-   }
+   //   return $this->_collect($customer);
+   // }
 
   /**
    * Tango catalogs.
@@ -70,18 +70,23 @@ class TangoApi
    */
   public function catalogs()
   {
-    $catalog = json_decode($this->request("GET", self::CATALOG_RESOURCE), true);
+    $catalogs = $this->request("GET", self::CATALOG_RESOURCE);
 
-    return $this->_collect($catalog);
+    return $catalogs;
+
+    // $catalog = json_decode($this->request("GET", self::CATALOG_RESOURCE), true);
+
+    // return $this->_collect($catalog);
   }
 
   public function request($method = "GET", $resource)
   {
     try {
-      if ($response = $this->client->request('GET', $resource)) {
-        return $this->_collect(json_decode($response->getBody(), true));
+      if ($response = $this->client->request($method, $resource)) {
+        return json_decode($response->getBody(), true);
       }
     } catch (RequestException $e) {
+      dd($e);
       if ($e->hasResponse()) {
         throw new TangoException('REQUEST FAILED: ' . Psr7\str($e->getResponse()));
       }
