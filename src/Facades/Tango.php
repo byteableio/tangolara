@@ -13,6 +13,6 @@ class Tango extends BaseFacade
      */
     protected static function getFacadeAccessor()
     {
-        return 'TangoApi';
+        return 'TangoService';
     }
 }

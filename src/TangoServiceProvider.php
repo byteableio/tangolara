@@ -14,11 +14,12 @@ class TangoServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('TangoApi', function ($app) {
-          $platform = isset($app['config']['tango.platform_name']) ? $app['config']['tango.platform_name'] : null;
-          $key = isset($app['config']['tango.platform_key']) ? $app['config']['tango.platform_key'] : null;
+        $this->app->singleton('TangoService', function ($app) {
 
-          return new TangoApi($platform, $key);
+            $platform = $app['config']['tango']['platform_name'];
+            $key = $app['config']['tango']['platform_key'];
+
+          return new TangoService($platform, $key);
         });
     }
 
@@ -27,6 +28,8 @@ class TangoServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__ . '/config/tango.php' => config_path('tango.php')]);
+        $this->package('byteable/tangolara', 'byteable/tangolara');
+
+        // $this->publishes([__DIR__ . '/config/tango.php' => config_path('tango.php')]);
     }
 }
